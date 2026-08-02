@@ -14,6 +14,7 @@ class Nurse(models.Model):
     experience = models.CharField('Опыт работы', max_length=10, choices=EXPERIENCE_CHOICES)
     specialization = models.CharField('Специализация', max_length=200)
     phone = models.CharField('Телефон', max_length=20)
+    photo = models.ImageField('Фото', upload_to='nurses/', blank=True, null=True)
     is_available = models.BooleanField('Доступна', default=True)
     description = models.TextField('Описание', blank=True)
 

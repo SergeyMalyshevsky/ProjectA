@@ -22,7 +22,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',  # Новое в Django 6.0
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -49,7 +48,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'nurse_service.wsgi.application'
-ASGI_APPLICATION = 'nurse_service.asgi.application'
 
 DATABASES = {
     'default': {
@@ -58,27 +56,17 @@ DATABASES = {
     }
 }
 
-# Новые настройки Django 6.0
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Настройки безопасности Django 6.0
-SECURE_REFERRER_POLICY = 'same-origin'
-SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
+AUTH_PASSWORD_VALIDATORS = []
 
 LANGUAGE_CODE = 'ru-ru'
 TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_TZ = True
 
-LOCALE_PATHS = [
-    BASE_DIR / 'locale',
-]
-
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = 'media/'
+# Настройки медиа-файлов
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Настройки для Django 6.0
-FORMS_URLFIELD_ASSUME_HTTPS = True
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -4,19 +4,76 @@
 
 {% block content %}
     <h2>Наши сиделки</h2>
+    <p style="margin-bottom: 2rem; color: #666;">Выберите подходящую сиделку для ваших близких</p>
 
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
         {% for nurse in nurses %}
-            <div style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: calc(33.333% - 1rem); min-width: 250px;">
-                <h3>{{ nurse.name }}</h3>
-                <p><strong>Возраст:</strong> {{ nurse.age }} лет</p>
-                <p><strong>Опыт:</strong> {{ nurse.get_experience_display }}</p>
-                <p><strong>Специализация:</strong> {{ nurse.specialization }}</p>
-                <p>{{ nurse.description|truncatechars:100 }}</p>
-                <a href="{% url 'nurse_app:create_order' nurse.id %}" style="display: inline-block; background: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Заказать</a>
+            <div style="background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s;">
+                <div style="display: flex; gap: 1.5rem; padding: 1.5rem;">
+                    <!-- Фото -->
+                    <div style="flex-shrink: 0; width: 150px; height: 150px; background: #e9ecef; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        {% if nurse.photo %}
+                            <img src="{{ nurse.photo.url }}" alt="{{ nurse.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        {% else %}
+                            <div style="text-align: center; color: #adb5bd;">
+                                <div style="font-size: 3rem;">👩‍⚕️</div>
+                                <div style="font-size: 0.8rem;">Нет фото</div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Информация -->
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem;">
+                            <h3 style="margin: 0; color: #333;">{{ nurse.name }}</h3>
+                            <span style="padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;
+                                {% if nurse.is_available %}
+                                    background: #d4edda; color: #155724;
+                                {% else %}
+                                    background: #f8d7da; color: #721c24;
+                                {% endif %}
+                            ">
+                                {% if nurse.is_available %}Доступна{% else %}Занята{% endif %}
+                            </span>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem;">
+                            <p style="margin: 0; color: #666;">
+                                <strong>Возраст:</strong> {{ nurse.age }} лет
+                            </p>
+                            <p style="margin: 0; color: #666;">
+                                <strong>Опыт:</strong> {{ nurse.get_experience_display }}
+                            </p>
+                            <p style="margin: 0; color: #666; grid-column: 1 / -1;">
+                                <strong>Специализация:</strong> {{ nurse.specialization }}
+                            </p>
+                        </div>
+
+                        {% if nurse.description %}
+                            <p style="color: #666; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem;">
+                                {{ nurse.description|truncatechars:150 }}
+                            </p>
+                        {% endif %}
+
+                        <div style="display: flex; gap: 0.75rem;">
+                            <a href="{% url 'nurse_app:nurse_detail' nurse.id %}"
+                               style="display: inline-block; background: #007bff; color: white; padding: 0.5rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; transition: background 0.3s;">
+                                Подробнее
+                            </a>
+                            {% if nurse.is_available %}
+                                <a href="{% url 'nurse_app:create_order' nurse.id %}"
+                                   style="display: inline-block; background: #28a745; color: white; padding: 0.5rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; transition: background 0.3s;">
+                                    Заказать услугу
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
         {% empty %}
-            <p>Нет доступных сиделок</p>
+            <div style="text-align: center; padding: 3rem; background: white; border-radius: 12px;">
+                <p style="font-size: 1.2rem; color: #999;">Нет доступных сиделок</p>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
