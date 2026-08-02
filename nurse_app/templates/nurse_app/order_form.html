@@ -1,0 +1,24 @@
+{% extends 'nurse_app/base.html' %}
+
+{% block title %}Оформление заказа - {{ nurse.name }}{% endblock %}
+
+{% block content %}
+    <h2>Оформление заказа</h2>
+    <p><strong>Выбранная сиделка:</strong> {{ nurse.name }}</p>
+
+    <form method="post" style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div style="margin-bottom: 1rem;">
+                <label>{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color: red;">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" style="background: #28a745; color: white; border: none; padding: 0.75rem 2rem; border-radius: 4px; cursor: pointer;">Отправить заказ</button>
+    </form>
+{% endblock %}

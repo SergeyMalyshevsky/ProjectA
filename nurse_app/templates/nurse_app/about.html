@@ -1,0 +1,61 @@
+{% extends 'nurse_app/base.html' %}
+
+{% block title %}О нас{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="mb-4">О компании "СиделкиPro"</h1>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3>Наша миссия</h3>
+                    <p>Мы предоставляем профессиональные услуги по уходу за пожилыми людьми и людьми с ограниченными возможностями. Наша цель - обеспечить качественный и заботливый уход, который позволит вашим близким чувствовать себя комфортно и безопасно.</p>
+
+                    <h3>Почему выбирают нас</h3>
+                    <ul>
+                        <li>Тщательный отбор сиделок с проверкой документов и рекомендаций</li>
+                        <li>Индивидуальный подход к каждому клиенту</li>
+                        <li>Гибкий график работы</li>
+                        <li>Круглосуточная поддержка</li>
+                        <li>Доступные цены</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4>Статистика</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Доступных сиделок
+                            <span class="badge bg-primary rounded-pill">{{ stats.total_nurses }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Выполненных заказов
+                            <span class="badge bg-success rounded-pill">{{ stats.completed_orders }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Активных заказов
+                            <span class="badge bg-info rounded-pill">{{ stats.active_orders }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4>Контакты</h4>
+                    <p><strong>Телефон:</strong> +7 (999) 123-45-67</p>
+                    <p><strong>Email:</strong> info@nurse-service.ru</p>
+                    <p><strong>Адрес:</strong> г. Москва, ул. Примерная, д. 123</p>
+                    <p><strong>Режим работы:</strong> Круглосуточно</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

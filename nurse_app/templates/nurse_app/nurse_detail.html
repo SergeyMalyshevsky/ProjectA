@@ -1,0 +1,25 @@
+{% extends 'nurse_app/base.html' %}
+
+{% block title %}{{ nurse.name }} - Информация{% endblock %}
+
+{% block content %}
+    <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        <h2>{{ nurse.name }}</h2>
+        <p><strong>Возраст:</strong> {{ nurse.age }} лет</p>
+        <p><strong>Опыт работы:</strong> {{ nurse.get_experience_display }}</p>
+        <p><strong>Специализация:</strong> {{ nurse.specialization }}</p>
+        <p><strong>Телефон:</strong> {{ nurse.phone }}</p>
+        <p><strong>Статус:</strong> {% if nurse.is_available %}Доступна{% else %}Занята{% endif %}</p>
+
+        {% if nurse.description %}
+            <p><strong>Описание:</strong> {{ nurse.description }}</p>
+        {% endif %}
+
+        {% if nurse.is_available %}
+            <a href="{% url 'nurse_app:create_order' nurse.id %}" style="display: inline-block; background: #28a745; color: white; padding: 0.75rem 2rem; text-decoration: none; border-radius: 4px;">Оформить заказ</a>
+        {% endif %}
+
+        <br><br>
+        <a href="{% url 'nurse_app:nurse_list' %}">← Назад к списку</a>
+    </div>
+{% endblock %}

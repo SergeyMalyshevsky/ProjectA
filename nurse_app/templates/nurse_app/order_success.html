@@ -1,0 +1,37 @@
+{% extends 'nurse_app/base.html' %}
+
+{% block title %}Заказ успешно создан{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card">
+                <div class="card-body py-5">
+                    <i class="fas fa-check-circle text-success fa-5x mb-4"></i>
+                    <h2>Заказ успешно создан!</h2>
+                    <p class="lead">Номер вашего заказа: <strong>#{{ order.id }}</strong></p>
+
+                    <div class="alert alert-info mt-4">
+                        <h5>Детали заказа:</h5>
+                        <p class="mb-1"><strong>Сиделка:</strong> {{ order.nurse.name }}</p>
+                        <p class="mb-1"><strong>Пациент:</strong> {{ order.patient_name }}</p>
+                        <p class="mb-1"><strong>Даты:</strong> {{ order.start_date }} - {{ order.end_date }}</p>
+                    </div>
+
+                    <p class="text-muted mt-3">Мы свяжемся с вами в ближайшее время для подтверждения заказа.</p>
+
+                    <div class="mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-home"></i> На главную
+                        </a>
+                        <a href="{% url 'nurse_list' %}" class="btn btn-outline-primary btn-lg ms-2">
+                            <i class="fas fa-users"></i> Другие сиделки
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

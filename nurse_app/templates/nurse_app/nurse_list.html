@@ -1,0 +1,22 @@
+{% extends 'nurse_app/base.html' %}
+
+{% block title %}Список сиделок{% endblock %}
+
+{% block content %}
+    <h2>Наши сиделки</h2>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+        {% for nurse in nurses %}
+            <div style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: calc(33.333% - 1rem); min-width: 250px;">
+                <h3>{{ nurse.name }}</h3>
+                <p><strong>Возраст:</strong> {{ nurse.age }} лет</p>
+                <p><strong>Опыт:</strong> {{ nurse.get_experience_display }}</p>
+                <p><strong>Специализация:</strong> {{ nurse.specialization }}</p>
+                <p>{{ nurse.description|truncatechars:100 }}</p>
+                <a href="{% url 'nurse_app:create_order' nurse.id %}" style="display: inline-block; background: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Заказать</a>
+            </div>
+        {% empty %}
+            <p>Нет доступных сиделок</p>
+        {% endfor %}
+    </div>
+{% endblock %}
